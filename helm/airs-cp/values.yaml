@@ -1,0 +1,180 @@
+# Default values for airs-cp
+# This is a YAML-formatted file.
+
+# Replica count
+replicaCount: 1
+
+# Image configuration
+image:
+  repository: airs-cp
+  pullPolicy: IfNotPresent
+  tag: "0.2.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# Service account
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+# Pod annotations and labels
+podAnnotations: {}
+podLabels: {}
+
+# Security context
+podSecurityContext:
+  fsGroup: 1000
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 1000
+
+# Gateway service
+gateway:
+  service:
+    type: ClusterIP
+    port: 8080
+  
+  # Resource limits
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+# Dashboard service
+dashboard:
+  enabled: true
+  service:
+    type: ClusterIP
+    port: 8501
+  
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+
+# AIRS-CP Configuration
+config:
+  # Runtime mode: observe or enforce
+  mode: observe
+  
+  # Default provider: openai, anthropic, azure, ollama
+  provider: ollama
+  
+  # Default model
+  model: llama3.2:1b
+  
+  # Logging level
+  logLevel: INFO
+  
+  # Kill switch (emergency bypass)
+  killSwitch: false
+  
+  # ML detection
+  mlEnabled: true
+  
+  # PII detection
+  piiDetectionEnabled: true
+  
+  # Injection detection
+  injectionDetectionEnabled: true
+  
+  # Taint tracking
+  taintTrackingEnabled: true
+  
+  # Explainability
+  explanationsEnabled: true
+  llmNarrativesEnabled: false
+
+# Provider secrets
+secrets:
+  # OpenAI
+  openaiApiKey: ""
+  
+  # Anthropic
+  anthropicApiKey: ""
+  
+  # Azure OpenAI
+  azureOpenaiEndpoint: ""
+  azureOpenaiKey: ""
+  
+  # Ollama (usually doesn't need secrets)
+  ollamaHost: "http://ollama:11434"
+
+# Existing secret name (alternative to inline secrets)
+existingSecret: ""
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - host: airs-cp.local
+      paths:
+        - path: /
+          pathType: Prefix
+          service: gateway
+        - path: /dashboard
+          pathType: Prefix
+          service: dashboard
+  tls: []
+  #  - secretName: airs-cp-tls
+  #    hosts:
+  #      - airs-cp.local
+
+# Persistence for evidence store
+persistence:
+  enabled: true
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  # Existing claim name
+  existingClaim: ""
+
+# Node selector
+nodeSelector: {}
+
+# Tolerations
+tolerations: []
+
+# Affinity rules
+affinity: {}
+
+# Health checks
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 30
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+# Metrics / monitoring
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: false
+    interval: 30s
+    scrapeTimeout: 10s

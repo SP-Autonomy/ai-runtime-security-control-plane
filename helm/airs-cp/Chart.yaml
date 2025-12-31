@@ -1,0 +1,17 @@
+apiVersion: v2
+name: airs-cp
+description: AI Runtime Security Control Plane - Enterprise AI Security Gateway
+type: application
+version: 0.2.0
+appVersion: "0.2.0"
+keywords:
+  - ai
+  - security
+  - llm
+  - gateway
+  - guardrails
+maintainers:
+  - name: AIRS-CP Team
+    email: team@airs-cp.dev
+sources:
+  - https://github.com/your-org/airs-cp

@@ -1,0 +1,87 @@
+version: "3.8"
+
+services:
+  # =============================================================================
+  # AIRS-CP Gateway - AI Runtime Security Control Plane
+  # =============================================================================
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: airs-cp-gateway
+    ports:
+      - "${AIRS_PORT:-8080}:8080"
+    environment:
+      # Runtime Configuration
+      - AIRS_MODE=${AIRS_MODE:-observe}
+      - AIRS_PROVIDER=${AIRS_PROVIDER:-ollama}
+      - AIRS_MODEL=${AIRS_MODEL:-llama3.2:1b}
+      - AIRS_HOST=0.0.0.0
+      - AIRS_PORT=8080
+      - AIRS_KILL_SWITCH=${AIRS_KILL_SWITCH:-false}
+      - AIRS_REQUEST_TIMEOUT=${AIRS_REQUEST_TIMEOUT:-120}
+      
+      # Provider Credentials (passed from host)
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT:-}
+      - AZURE_OPENAI_KEY=${AZURE_OPENAI_KEY:-}
+      - AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION:-2024-02-15-preview}
+      
+      # Ollama - connect to host when running locally
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
+      
+      # Database
+      - AIRS_DB_PATH=/data/evidence.db
+    volumes:
+      - airs-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - airs-network
+    # For local development with Ollama on host
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # =============================================================================
+  # Ollama (optional - for local LLM testing)
+  # Uncomment to run Ollama in container instead of host
+  # =============================================================================
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: airs-cp-ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama-data:/root/.ollama
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #   restart: unless-stopped
+  #   networks:
+  #     - airs-network
+  #   # Uncomment for GPU support (NVIDIA)
+  #   # deploy:
+  #   #   resources:
+  #   #     reservations:
+  #   #       devices:
+  #   #         - driver: nvidia
+  #   #           count: 1
+  #   #           capabilities: [gpu]
+
+networks:
+  airs-network:
+    driver: bridge
+
+volumes:
+  airs-data:
+    driver: local
+  # ollama-data:
+  #   driver: local

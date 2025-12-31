@@ -1,0 +1,9 @@
+{
+    "include": ["src", "tests", "samples"],
+    "exclude": ["**/__pycache__", "**/node_modules", ".git"],
+    "extraPaths": ["src"],
+    "pythonVersion": "3.11",
+    "typeCheckingMode": "basic",
+    "reportMissingImports": false,
+    "reportMissingTypeStubs": false
+}
