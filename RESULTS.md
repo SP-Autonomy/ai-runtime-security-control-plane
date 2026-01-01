@@ -101,7 +101,7 @@ SCENARIO 4: Wrong Agent (Non-deterministic routing)
 | Injection Detection | **1ms** | <1ms ✓ |
 | ML Anomaly | **~0.5ms** | <1ms ✓ |
 | Total Overhead | **1.9ms** | <2ms ✓ |
-![](~ai-runtime-security-control-plane/screenshots/dashboard_metrics.png)
+![Agentic AI security dashboard metrics](screenshots/dashboard_metrics.png)
 
 ### Gateway Performance
 
