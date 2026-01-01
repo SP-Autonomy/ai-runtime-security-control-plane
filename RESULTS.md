@@ -61,7 +61,8 @@ Top features: ['has_system_keywords', 'unique_word_ratio',
 | Excessive tool calls | **100%** | 0% |
 | Wrong agent routing | **80%** | <3% |
 | PII exfiltration attempt | **99%** | <1% |
-![](screenshots/agent_deviation.png)
+
+![Agent Deviation](screenshots/agent_deviation.png)
 
 ### Real-World Demo Results
 
@@ -101,6 +102,7 @@ SCENARIO 4: Wrong Agent (Non-deterministic routing)
 | Injection Detection | **1ms** | <1ms ✓ |
 | ML Anomaly | **~0.5ms** | <1ms ✓ |
 | Total Overhead | **1.9ms** | <2ms ✓ |
+
 ![Agentic AI security dashboard metrics](screenshots/dashboard_metrics.png)
 
 ### Gateway Performance
