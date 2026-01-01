@@ -11,8 +11,10 @@ AIRS-CP demonstrates production-grade AI runtime security with:
 ---
 
 ## Security Detection Results
+![Dashboard Live](screenshots/dashboard_live.png)
 
 ### Injection Detection
+![Injection Detection](screenshots/injection_detection.png)
 
 | Model | Accuracy | Precision | Training Time |
 |-------|----------|-----------|---------------|
@@ -30,6 +32,7 @@ Top features: ['has_system_keywords', 'unique_word_ratio',
 ```
 
 ### PII Detection
+![PII Detection](screenshots/pii_detection.png)
 
 | Pattern | Coverage | False Positive Rate |
 |---------|----------|---------------------|
@@ -37,7 +40,7 @@ Top features: ['has_system_keywords', 'unique_word_ratio',
 | Credit Card | 100% | <1% |
 | Email | 100% | <0.5% |
 | Phone | 95% | <2% |
-![](screenshots/pii_detection.png)
+
 
 ### Anomaly Detection (IsolationForest)
 
@@ -53,6 +56,7 @@ Top features: ['has_system_keywords', 'unique_word_ratio',
 ## Agent Observability Results
 
 ### Behavioral Deviation Detection
+![Agent Deviation](screenshots/agent_deviation.png)
 
 | Scenario | Detection Rate | False Positive |
 |----------|----------------|----------------|
@@ -62,7 +66,6 @@ Top features: ['has_system_keywords', 'unique_word_ratio',
 | Wrong agent routing | **80%** | <3% |
 | PII exfiltration attempt | **99%** | <1% |
 
-![Agent Deviation](screenshots/agent_deviation.png)
 
 ### Real-World Demo Results
 
@@ -95,6 +98,7 @@ SCENARIO 4: Wrong Agent (Non-deterministic routing)
 ## Performance Benchmarks
 
 ### Security Overhead
+![Agentic AI security dashboard metrics](screenshots/dashboard_metrics.png)
 
 | Check | Latency | Target |
 |-------|---------|--------|
@@ -103,7 +107,6 @@ SCENARIO 4: Wrong Agent (Non-deterministic routing)
 | ML Anomaly | **~0.5ms** | <1ms ✓ |
 | Total Overhead | **1.9ms** | <2ms ✓ |
 
-![Agentic AI security dashboard metrics](screenshots/dashboard_metrics.png)
 
 ### Gateway Performance
 
@@ -168,7 +171,7 @@ Test breakdown:
 ---
 
 ## CLI Recording
-![](recordings/cli.cast)
+![CLI Cast](recordings/cli.cast)
 
 ---
 ## Key Achievements
