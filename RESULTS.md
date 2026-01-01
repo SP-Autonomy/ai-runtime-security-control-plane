@@ -21,7 +21,6 @@ AIRS-CP demonstrates production-grade AI runtime security with:
 | LogisticRegression Classifier | **97.8%** | 96.5% | ~10s |
 | Pattern-based Rules | ~85% | 90% | N/A |
 | Combined (Pattern + ML) | **98%+** | 97% | N/A |
-![](screenshots/injection_detection.png)
 
 **Test Results:**
 ```
