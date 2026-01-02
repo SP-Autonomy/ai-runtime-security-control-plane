@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Production%20Ready-brightgreen" alt="Status">
-  <img src="https://img.shields.io/badge/Tests-154%20Passing-brightgreen" alt="Tests">
+  <img src="https://img.shields.io/badge/Tests-1154%20Passing-brightgreen" alt="Tests">
   <img src="https://img.shields.io/badge/ML%20Accuracy-97.8%25-blue" alt="ML Accuracy">
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
 </p>
