@@ -52,6 +52,8 @@ The [OWASP Top 10 for Agentic AI](https://owasp.org/www-project-top-10-for-large
 | Data Exfiltration | Taint tracking with lineage | Per-request |
 
 ### 🔍 Agent Observability
+- **SHAP explainability**:
+Why certain agent was used and why tool invoked?
 - **Tool invocation tracking**: See every tool call with reasoning
 - **Behavioral deviation detection**: Know when agents act unexpectedly
 - **Non-determinism monitoring**: Same input, different agent behavior? We detect it.
